@@ -6,6 +6,8 @@ import AnalyticsPage from "../pages/dashboard/AnalyticsPage";
 import SalesReportPage from "../pages/dashboard/SalesReportPage";
 import InventoryPage from "../pages/dashboard/InventoryPage";
 import EditInventoryPage from "../pages/dashboard/EditInventoryPage";
+import SignInPage from "../pages/auth/SignInPage";
+import SignUpPage from "../pages/auth/SignUpPage";
 
 const Pages = () => {
   const pathsList = [
@@ -14,6 +16,8 @@ const Pages = () => {
     { path: "/sales-report", component: <SalesReportPage /> },
     { path: "/inventory", component: <InventoryPage /> },
     { path: "/inventory/edit-inventory", component: <EditInventoryPage /> },
+    { path: "/sign-in", component: <SignInPage /> },
+    { path: "/sign-up", component: <SignUpPage /> },
   ];
 
   return (

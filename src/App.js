@@ -1,12 +1,11 @@
-import { useEffect } from "react";
 import { BrowserRouter } from "react-router-dom";
-import { LayoutInSide } from "./layouts/LayoutInSide";
+import Layout from "./layouts/Layout";
 
 function App() {
   return (
     <>
       <BrowserRouter>
-        <LayoutInSide />
+        <Layout />
       </BrowserRouter>
     </>
   );

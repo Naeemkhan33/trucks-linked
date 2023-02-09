@@ -12,7 +12,7 @@ import {
 const accountLinks = [
   { name: "Dealership", href: "/dealership", icon: PhoneIcon },
   { name: "settings", href: "/settings", icon: Cog6ToothIcon },
-  { name: "Logout", href: "/login", icon: ArrowRightOnRectangleIcon },
+  { name: "Logout", href: "/sign-in", icon: ArrowRightOnRectangleIcon },
 ];
 
 const ProfileCard = () => {

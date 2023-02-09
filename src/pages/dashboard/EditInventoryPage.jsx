@@ -6,6 +6,7 @@ import {
   XCircleIcon,
 } from "@heroicons/react/24/outline";
 import React from "react";
+import { useLocation, useParams } from "react-router-dom";
 import ExportButton from "../../components/buttons/ExportButton";
 import PrintButton from "../../components/buttons/PrintButton";
 import CustomSelect from "../../components/inputs/CustomSelect";
@@ -25,6 +26,9 @@ const people = [
 ];
 
 const EditInventoryPage = () => {
+  const { state } = useLocation();
+
+  console.log("location", state);
   return (
     <div className="mb-4">
       <section>
@@ -36,7 +40,7 @@ const EditInventoryPage = () => {
                   <h3 className="text-bodyText text-xl font-semibold capitalize mr-auto">
                     Vehicle Data
                   </h3>
-                  <h3 className="text-bodyText">ID: 123456</h3>
+                  <h3 className="text-bodyText">ID: {state?.data?.SKU}</h3>
                 </div>
                 <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-4">
                   <li>
@@ -54,6 +58,7 @@ const EditInventoryPage = () => {
                         id="DisplayTitle"
                         className="block w-full px-3 py-2 placeholder:font-medium placeholder:text-gray-400 rounded-md border border-gray-300 shadow-sm focus-visible:outline-none focus:border-primary focus:ring-primary sm:text-sm"
                         placeholder="New International LT 2022"
+                        value={state?.data?.company}
                       />
                     </div>
                     {/* === */}
@@ -62,6 +67,7 @@ const EditInventoryPage = () => {
                         placeholder="Default Select"
                         label="Make"
                         items={people}
+                        value={state?.data?.make}
                       />
                     </div>
                   </li>
@@ -89,6 +95,7 @@ const EditInventoryPage = () => {
                         placeholder="Default Select"
                         label="Year"
                         items={people}
+                        value={state?.data?.year}
                       />
                     </div>
                   </li>
@@ -98,6 +105,7 @@ const EditInventoryPage = () => {
                         placeholder="Default Select"
                         label="Model"
                         items={people}
+                        value={state?.data?.model}
                       />
                     </div>
                   </li>
@@ -116,6 +124,7 @@ const EditInventoryPage = () => {
                         id="GVW"
                         className="block w-full px-3 py-2 placeholder:font-medium placeholder:text-gray-400 rounded-md border border-gray-300 shadow-sm focus-visible:outline-none focus:border-primary focus:ring-primary sm:text-sm"
                         placeholder="New International LT 2022"
+                        value={state?.data?.front_axle_gvw}
                       />
                     </div>
                   </li>
@@ -134,6 +143,7 @@ const EditInventoryPage = () => {
                         id="VINNumber"
                         className="block w-full px-3 py-2 placeholder:font-medium placeholder:text-gray-400 rounded-md border border-gray-300 shadow-sm focus-visible:outline-none focus:border-primary focus:ring-primary sm:text-sm"
                         placeholder="New International LT 2022"
+                        value={state?.data?.vin}
                       />
                     </div>
                   </li>
@@ -152,6 +162,7 @@ const EditInventoryPage = () => {
                         id="ListPrice"
                         className="block w-full px-3 py-2 placeholder:font-medium placeholder:text-gray-400 rounded-md border border-gray-300 shadow-sm focus-visible:outline-none focus:border-primary focus:ring-primary sm:text-sm"
                         placeholder="New International LT 2022"
+                        value={state?.data?.regular_price}
                       />
                     </div>
                   </li>
@@ -164,6 +175,7 @@ const EditInventoryPage = () => {
                         id="SalePrice"
                         className="block w-full px-3 py-2 placeholder:font-medium placeholder:text-gray-400 rounded-md border border-gray-300 shadow-sm focus-visible:outline-none focus:border-primary focus:ring-primary sm:text-sm"
                         placeholder="New International LT 2022"
+                        value={state?.data?.sale_price}
                       />
                     </div>
                   </li>
@@ -195,6 +207,7 @@ const EditInventoryPage = () => {
                         placeholder="Default Select"
                         label="Location"
                         items={people}
+                        value={state?.data?.location}
                       />
                     </div>
                   </li>
@@ -338,6 +351,7 @@ const EditInventoryPage = () => {
                           id="Mileage"
                           className="block w-full px-3 py-2 placeholder:font-medium placeholder:text-gray-400 rounded-md border border-gray-300 shadow-sm focus-visible:outline-none focus:border-primary focus:ring-primary sm:text-sm"
                           placeholder="000..."
+                          value={state?.data?.mileage}
                         />
                         <div className="w-[70px]">
                           <CustomSelect placeholder="mi" items={people} />
@@ -376,6 +390,7 @@ const EditInventoryPage = () => {
                           id="Horsepower"
                           className="block w-full px-3 py-2 placeholder:font-medium placeholder:text-gray-400 rounded-md border border-gray-300 shadow-sm focus-visible:outline-none focus:border-primary focus:ring-primary sm:text-sm"
                           placeholder="000..."
+                          value={state?.data?.horse_power}
                         />
                         <div className="w-[70px]">
                           <CustomSelect placeholder="hp" items={people} />
@@ -414,6 +429,7 @@ const EditInventoryPage = () => {
                         id="EngineModel"
                         className="block w-full px-3 py-2 placeholder:font-medium placeholder:text-gray-400 rounded-md border border-gray-300 shadow-sm focus-visible:outline-none focus:border-primary focus:ring-primary sm:text-sm"
                         placeholder="000..."
+                        value={state?.data?.engine_model}
                       />
                     </div>
                   </li>
@@ -423,6 +439,7 @@ const EditInventoryPage = () => {
                         label="Fuel Type"
                         placeholder="Diesel"
                         items={people}
+                        value={state?.data?.fuel_type}
                       />
                     </div>
                   </li>
@@ -441,6 +458,7 @@ const EditInventoryPage = () => {
                         label="Drive"
                         placeholder="4x2"
                         items={people}
+                        value={state?.data?.drivetrain}
                       />
                     </div>
                   </li>
@@ -450,6 +468,7 @@ const EditInventoryPage = () => {
                         label="Suspension"
                         placeholder="Air Ride"
                         items={people}
+                        value={state?.data?.suspension}
                       />
                     </div>
                   </li>
@@ -459,6 +478,7 @@ const EditInventoryPage = () => {
                         label="Axles"
                         placeholder="Single"
                         items={people}
+                        value={state?.data?.axle_type}
                       />
                     </div>
                   </li>
@@ -477,6 +497,7 @@ const EditInventoryPage = () => {
                         label="Wheelbase"
                         placeholder="4x2"
                         items={people}
+                        value={state?.data?.wheelbase}
                       />
                     </div>
                   </li>
@@ -486,6 +507,7 @@ const EditInventoryPage = () => {
                         label="Color"
                         placeholder="Air Ride"
                         items={people}
+                        value={state?.data?.color}
                       />
                     </div>
                   </li>
@@ -505,7 +527,7 @@ const EditInventoryPage = () => {
           {/* buttons */}
           <div className="mt-6 flex flex-wrap gap-3">
             <PrintButton />
-            <ExportButton />
+            <ExportButton data={state.data} />
             <button
               type="button"
               className="inline-flex items-center rounded-md border border-transparent bg-primary px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 md:mr-auto"

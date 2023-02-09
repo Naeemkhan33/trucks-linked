@@ -6,7 +6,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function CustomSelect({ items, label, placeholder }) {
+export default function CustomSelect({ items, label, placeholder, value }) {
   const [selected, setSelected] = useState("");
 
   return (
@@ -24,8 +24,12 @@ export default function CustomSelect({ items, label, placeholder }) {
               {selected.name ? (
                 <span className="block truncate">{selected.name}</span>
               ) : (
-                <span className="block truncate sm:text-sm capitalize font-medium text-gray-400">
-                  {placeholder}
+                <span
+                  className={`block truncate sm:text-sm capitalize font-medium ${
+                    value ? "" : "text-gray-400"
+                  } `}
+                >
+                  {value ? value : placeholder}
                 </span>
               )}
 

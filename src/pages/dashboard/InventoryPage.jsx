@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import DashboardCard from "../../components/cards/DashboardCard";
 import TrucksTable from "../../components/tables/TrucksTable";
 
 const cardsList = [{}, {}, {}, {}];
 
 const InventoryPage = () => {
+  console.log("running");
   const rowsPerPage = 5;
+
+  // console.log("data", data);
 
   return (
     <div className="mb-4">

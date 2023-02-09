@@ -1,9 +1,12 @@
 import { PlusIcon } from "@heroicons/react/20/solid";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import TableToolbarCard from "../cards/TableToolbarCard";
+import * as AWS from "aws-sdk";
 
 const TrucksTable = ({ rowsPerPage }) => {
+  const docClient = new AWS.DynamoDB.DocumentClient();
   const [currentPage, setCurrentPage] = useState(1);
+  const [data, setData] = useState([]);
 
   const rows = [
     {
@@ -206,8 +209,31 @@ const TrucksTable = ({ rowsPerPage }) => {
 
   const lastIndex = currentPage * rowsPerPage;
   const firstIndex = lastIndex - rowsPerPage;
-  const currentRows = rows.slice(firstIndex, lastIndex);
-  const totalPages = Math.ceil(rows.length / rowsPerPage);
+  const currentRows = data?.slice(firstIndex, lastIndex);
+  const totalPages = Math.ceil(data?.length / rowsPerPage);
+
+  const fetchData = (tableName, paginateValue) => {
+    var params = {
+      TableName: tableName,
+    };
+
+    docClient.scan(params, function (err, data) {
+      if (!err) {
+        console.log(data);
+        setData(data?.Items);
+      } else {
+        console.log("err", err);
+      }
+    });
+  };
+
+  useEffect(() => {
+    fetchData("Vehicles", null);
+  }, []);
+
+  if (data.length === 0) {
+    return <>loading...</>;
+  }
 
   return (
     <div>
@@ -243,7 +269,7 @@ const TrucksTable = ({ rowsPerPage }) => {
             </tr>
           </thead>
           <tbody>
-            {currentRows.map((row, index) => (
+            {currentRows?.map((row, index) => (
               <tr key={`sales-row-${index}`} className="text-bodyText">
                 <td className="px-4 py-4 uppercase">
                   <input
@@ -269,9 +295,9 @@ const TrucksTable = ({ rowsPerPage }) => {
                 <td className="px-4 py-4 text-red-500 uppercase">
                   {row.unitID}
                 </td>
-                <td className="px-4 py-4 uppercase">{row.vin}</td>
-                <td className="px-4 py-4 capitalize">{row.make}</td>
-                <td className="px-4 py-4">{row.model}</td>
+                <td className="px-4 py-4 uppercase">{row?.vin}</td>
+                <td className="px-4 py-4 capitalize">{row?.make}</td>
+                <td className="px-4 py-4">{row?.model}</td>
                 <td className="px-4 py-4 capitalize">
                   <div className="flex items-center gap-2">
                     <button
@@ -291,7 +317,7 @@ const TrucksTable = ({ rowsPerPage }) => {
                 </td>
                 <td className="px-4 py-4 capitalize">{row.aging}</td>
                 <td className="px-4 py-4 uppercase">
-                  <TableToolbarCard />
+                  <TableToolbarCard data={row} />
                 </td>
               </tr>
             ))}
@@ -312,7 +338,7 @@ const TrucksTable = ({ rowsPerPage }) => {
         <button
           className="bg-sky-100 text-sky-600 hover:bg-sky-500 hover:text-white py-1 px-4 rounded-md disabled:cursor-not-allowed disabled:bg-gray-200 disabled:text-gray-400"
           onClick={() => setCurrentPage(currentPage + 1)}
-          disabled={currentPage === Math.ceil(rows.length / rowsPerPage)}
+          disabled={currentPage === Math.ceil(data?.length / rowsPerPage)}
         >
           Next
         </button>

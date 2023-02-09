@@ -6,7 +6,7 @@ import {
 } from "@heroicons/react/24/outline";
 import { Link } from "react-router-dom";
 
-const TableToolbarCard = () => {
+const TableToolbarCard = ({ data }) => {
   const [addFavorite, setAddFavorite] = useState(false);
   return (
     <div className="p-2 bg-gray-100 rounded-md flex items-center justify-center gap-3">
@@ -27,6 +27,7 @@ const TableToolbarCard = () => {
       </button>
       <Link
         to="/inventory/edit-inventory"
+        state={{ data }}
         className="text-gray-400 hover:text-bodyText active:scale-105"
       >
         <PencilSquareIcon className="h-4 w-4" />

@@ -2,8 +2,8 @@ import React, { useState } from "react";
 
 import { CloudArrowUpIcon } from "@heroicons/react/24/outline";
 
-function ExportButton() {
-  const [data, setData] = useState({ name: "John", age: 25 });
+function ExportButton({ data }) {
+  // const [data, setData] = useState({ name: "John", age: 25 });
   const handleExport = () => {
     const dataStr = JSON.stringify(data);
     const dataUri =
